@@ -37,7 +37,7 @@ app.post("/Payment", (request, response) => {
         amount: amount,
         currency: currency,
         source: token,
-        description: "Pay In Advance Transaction from LawnNinja by" + "\t" + UserID,
+        description: `Pay In Advance Transaction from LawnNinja by\\t${UserID}`,
       }
       /*
       { idempotencyKey: idempontencyKey }
