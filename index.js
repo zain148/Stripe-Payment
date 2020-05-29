@@ -22,7 +22,7 @@ const idempontencyKey = uuid();
 //WE ARE GOING TO DO process.env.port()
 //here heroku will select the port automatically
 //that heroku provide us the port
-const PORT = process.env.PORT() || 5000;
+const PORT = process.env.PORT || 5000;
 app.post(PORT, (request, response) => {
   const { amount, currency, token } = request.body;
 
