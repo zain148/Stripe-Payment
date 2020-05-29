@@ -19,8 +19,11 @@ const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
 const idempontencyKey = uuid();
-
-app.post("/Payment", (request, response) => {
+//WE ARE GOING TO DO process.env.port()
+//here heroku will select the port automatically
+//that heroku provide us the port
+const PORT = process.env.PORT() || 5000;
+app.post(PORT, (request, response) => {
   const { amount, currency, token } = request.body;
 
   // eslint-disable-next-line promise/catch-or-return
