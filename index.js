@@ -26,7 +26,7 @@ const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
 
-let PortNumber = 5000;
+let PortNumber = process.env.PORT || 5000;
 
 app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
