@@ -46,7 +46,7 @@ app.get("/Payment", (request, response) => {
       function (err, charge) {
         console.log("error", err);
         //this return charge will return the success object
-        window.alert(charge);
+        response.send(charge);
         //  console.log("Done charge", charge);
       }
     )
