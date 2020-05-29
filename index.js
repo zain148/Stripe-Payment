@@ -1,6 +1,6 @@
-const stripe = require("stripe")("sk_test_ThlDssrPmTUhR9DGYEf0A4Le00LbNvGZCO");
+//const stripe = require("stripe")("sk_test_ThlDssrPmTUhR9DGYEf0A4Le00LbNvGZCO");
 //set for local environment request
-import express, { json } from "express";
+const express = require("express");
 //const cors = require("cors");
 
 //const ngrok = require("ngrok");
@@ -12,7 +12,7 @@ import express, { json } from "express";
  * then type ngrok http 8000
  */
 
-import uuid from "uuid/v4";
+//import uuid from "uuid/v4";
 const app = express();
 
 //Middleware
@@ -21,12 +21,13 @@ const app = express();
 //app.use(express.static(`${__dirname}/StripeBackend`));
 
 //inthis case i'm receiving json
-app.use(json());
-const idempontencyKey = uuid();
+//app.use(json());
+//const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
 
 let PortNumber = process.env.PORT || 5000;
+/*
 app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
 
@@ -65,12 +66,14 @@ app.post("/Payment", (request, response) => {
 
   //closing of post request
 });
-
+*/
 //to show some message on get request
 app.get("/", (req, res) => {
   res.send("It Working Smoothly on heroku server zain!");
 });
 
 //will start hosting like localhost:8282 you'll see message in get
-app.listen(PortNumber, () => console.log("Port is RUnning"));
+app.listen(PortNumber, () => {
+  return console.log("Port is RUnning");
+});
 //exports.Payment = functions.https.onRequest(app);
