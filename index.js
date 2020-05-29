@@ -1,4 +1,4 @@
-//const stripe = require("stripe")("sk_test_ThlDssrPmTUhR9DGYEf0A4Le00LbNvGZCO");
+const stripe = require("stripe")("sk_test_ThlDssrPmTUhR9DGYEf0A4Le00LbNvGZCO");
 //set for local environment request
 const express = require("express");
 //const cors = require("cors");
@@ -12,22 +12,22 @@ const express = require("express");
  * then type ngrok http 8000
  */
 
-//import uuid from "uuid/v4";
+import uuid from "uuid/v4";
 const app = express();
 
 //Middleware
 // Automatically allow cross-origin requests
 //app.use(cors({ origin: true }));
 //app.use(express.static(`${__dirname}/StripeBackend`));
-
+app.use(express.json());
 //inthis case i'm receiving json
 //app.use(json());
-//const idempontencyKey = uuid();
+const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
 
 let PortNumber = process.env.PORT || 5000;
-/*
+
 app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
 
@@ -66,7 +66,7 @@ app.post("/Payment", (request, response) => {
 
   //closing of post request
 });
-*/
+
 //to show some message on get request
 app.get("/", (req, res) => {
   res.send("It Working Smoothly on heroku server zain!");
