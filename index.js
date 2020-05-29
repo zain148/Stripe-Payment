@@ -19,11 +19,11 @@ const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
 const idempontencyKey = uuid();
-//WE ARE GOING TO DO process.env.port()
-//here heroku will select the port automatically
-//that heroku provide us the port
+//now this is required to be set the port number to
+//the port the heroku will decide
+
 const PORT = process.env.PORT || 5000;
-app.post(PORT, (request, response) => {
+app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
 
   // eslint-disable-next-line promise/catch-or-return
@@ -68,5 +68,5 @@ app.get("/", (req, res) => {
 });
 
 //will start hosting like localhost:8282 you'll see message in get
-app.listen(8000, () => console.log("Port is RUnning"));
+app.listen(PORT, () => console.log("Port is RUnning"));
 //exports.Payment = functions.https.onRequest(app);
