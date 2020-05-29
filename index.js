@@ -13,12 +13,11 @@ const cors = require("cors");
  */
 
 const app = express();
-//const { v4: uuidv4 } = require("uuid/v4");
+//const uuid = require("uuid/v4")
 
 //Middleware
-// Automatically allow cross-origin requests
+// Automatically allow cross-origin requests for localhost
 app.use(cors({ origin: true }));
-//app.use(express.static(`${__dirname}/StripeBackend`));
 //this app will use json
 app.use(express.json());
 //inthis case i'm receiving js
@@ -29,17 +28,15 @@ const idempontencyKey = RandomNumber;
 
 let PortNumber = process.env.PORT || 5000;
 
-app.post("/Payment", (request, response) => {
-  const { amount, currency, token } = request.body;
-
-  // eslint-disable-next-line promise/catch-or-return
+app.get("/Payment", (request, response) => {
+  // const { amount, currency, token } = request.body;
 
   stripe.charges
     .create(
       {
-        amount: amount,
-        currency: currency,
-        source: token.id,
+        amount: 1000,
+        currency: "usd",
+        source: "tok_visa",
         description: "Transaction for Lawn Ninja Pay In Advance",
       },
       {
@@ -73,8 +70,7 @@ app.get("/", (req, res) => {
   res.send("Smoothly on heroku server zain!");
 });
 
-//will start hosting like localhost:8282 you'll see message in get
+//will start hosting like localhost:5000 you'll see message in get
 app.listen(PortNumber, () => {
   return console.log("Port is RUnning");
 });
-//exports.Payment = functions.https.onRequest(app);
