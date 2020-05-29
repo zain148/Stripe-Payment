@@ -12,16 +12,16 @@ const express = require("express");
  * then type ngrok http 8000
  */
 
-import uuid from "uuid/v4";
+const uuid = require("uuid/v4");
 const app = express();
 
 //Middleware
 // Automatically allow cross-origin requests
 //app.use(cors({ origin: true }));
 //app.use(express.static(`${__dirname}/StripeBackend`));
+//this app will use json
 app.use(express.json());
-//inthis case i'm receiving json
-//app.use(json());
+//inthis case i'm receiving jso
 const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
@@ -67,9 +67,9 @@ app.post("/Payment", (request, response) => {
   //closing of post request
 });
 
-//to show some message on get request
+//to show some message on get requestyh7ggt
 app.get("/", (req, res) => {
-  res.send("It Working Smoothly on heroku server zain!");
+  res.send("Smoothly on heroku server zain!");
 });
 
 //will start hosting like localhost:8282 you'll see message in get
