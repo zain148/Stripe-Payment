@@ -13,14 +13,14 @@ const cors = require("cors");
  */
 
 const app = express();
-const uuid = require("uuid/v4");
+//const uuid = require("uuid/v4");
 //Middleware
 // Automatically allow cross-origin requests for localhost
 app.use(cors({ origin: true }));
 //this app will use json
 app.use(express.json());
 //inthis case i'm receiving js
-const idempontencyKey = uuid();
+//const idempontencyKey = uuidv4();
 //const RandomNumber = Math.floor(Math.random() * 42523);
 //const idempontencyKey = RandomNumber;
 //now this is required to be set the port number to
@@ -38,8 +38,10 @@ app.post("/Payment", (request, response) => {
         currency: currency,
         source: token,
         description: "Pay In Advance Transaction from LawnNinja",
-      },
+      }
+      /*
       { idempotencyKey: idempontencyKey }
+      */
       /*
       // this will handle error in stripe and show in console the return message
       //here charge will return us the object success
