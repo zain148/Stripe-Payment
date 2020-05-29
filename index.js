@@ -21,43 +21,40 @@ app.use(cors({ origin: true }));
 //this app will use json
 app.use(express.json());
 //inthis case i'm receiving js
-const RandomNumber = Math.floor(Math.random() * 1231231231245454572523);
+const RandomNumber = Math.floor(Math.random() * 42523);
 const idempontencyKey = RandomNumber;
 //now this is required to be set the port number to
 //the port the heroku will decide
 
 let PortNumber = process.env.PORT || 5000;
 
-app.get("/Payment", (request, response) => {
-  // const { amount, currency, token } = request.body;
+app.post("/Payment", (request, response) => {
+  const { amount, currency, token } = request.body;
 
   stripe.charges
     .create(
       {
-        amount: 1000,
-        currency: "usd",
-        source: "tok_visa",
-        description: "Transaction for Lawn Ninja Pay In Advance",
+        amount: amount,
+        currency: currency,
+        source: token,
+        description: "Pay In Advance Transaction from LawnNinja",
       },
-      {
-        idempotencyKey: idempontencyKey,
-      },
+      { idempotencyKey: idempontencyKey }
+      /*
       // this will handle error in stripe and show in console the return message
+      //here charge will return us the object success
       function (err, charge) {
         console.log("error", err);
         //this return charge will return the success object
-        response.send(charge);
-        //  console.log("Done charge", charge);
+
+        console.log(charge);
       }
+      */
     )
-    // eslint-disable-next-line promise/always-return
+    //here response will send it to the stripe
     .then((charge) => {
       response.send(charge);
       // console.log("I'm calling Data outside",Data)
-    })
-    //this will return status to our frontend with status 200 when it's done
-    .then((result) => {
-      return response.status(200).json(result);
     })
     .catch((error) => {
       console.log(error);
