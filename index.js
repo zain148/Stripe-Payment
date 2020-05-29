@@ -14,9 +14,8 @@ const cors = require("cors");
 
 const uuid = require("uuid/v4");
 const app = express();
-const http = require("http");
-const server = http.Server(app);
-app.use(express.static("client"));
+
+//app.use(express.static("client"));
 //Middleware
 // Automatically allow cross-origin requests
 app.use(cors({ origin: true }));
@@ -25,8 +24,8 @@ const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
 
-const PORT = process.env.PORT || 5000;
-server.post("/Payment", (request, response) => {
+app.set("port", process.env.PORT || 5000);
+app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
 
   // eslint-disable-next-line promise/catch-or-return
@@ -66,10 +65,10 @@ server.post("/Payment", (request, response) => {
 });
 
 //to show some message on get request
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("It Working Smoothly on heroku server zain!");
 });
 
 //will start hosting like localhost:8282 you'll see message in get
-server.listen(PORT, () => console.log("Port is RUnning"));
+app.listen(app.get("port"), () => console.log("Port is RUnning"));
 //exports.Payment = functions.https.onRequest(app);
