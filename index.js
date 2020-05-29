@@ -13,20 +13,20 @@ const cors = require("cors");
  */
 
 const app = express();
-//const uuid = require("uuid/v4")
-
+const uuid = require("uuid/v4");
 //Middleware
 // Automatically allow cross-origin requests for localhost
 app.use(cors({ origin: true }));
 //this app will use json
 app.use(express.json());
 //inthis case i'm receiving js
-const RandomNumber = Math.floor(Math.random() * 42523);
-const idempontencyKey = RandomNumber;
+const idempontencyKey = uuid();
+//const RandomNumber = Math.floor(Math.random() * 42523);
+//const idempontencyKey = RandomNumber;
 //now this is required to be set the port number to
 //the port the heroku will decide
 
-let PortNumber = process.env.PORT || 5000;
+let PortNumber = 5000;
 
 app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
