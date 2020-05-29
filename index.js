@@ -12,8 +12,8 @@ const cors = require("cors");
  * then type ngrok http 8000
  */
 
-//const uuid = require("uuid/v4");
 const app = express();
+//const { v4: uuidv4 } = require("uuid/v4");
 
 //Middleware
 // Automatically allow cross-origin requests
@@ -21,8 +21,9 @@ app.use(cors({ origin: true }));
 //app.use(express.static(`${__dirname}/StripeBackend`));
 //this app will use json
 app.use(express.json());
-//inthis case i'm receiving jso
-//const idempontencyKey = uuid();
+//inthis case i'm receiving js
+const RandomNumber = Math.floor(Math.random() * 1231231231245454572523);
+const idempontencyKey = RandomNumber;
 //now this is required to be set the port number to
 //the port the heroku will decide
 
@@ -41,9 +42,9 @@ app.post("/Payment", (request, response) => {
         source: token.id,
         description: "Transaction for Lawn Ninja Pay In Advance",
       },
-      /*  {
+      {
         idempotencyKey: idempontencyKey,
-      },*/
+      },
       // this will handle error in stripe and show in console the return message
       function (err, charge) {
         console.log("error", err);
