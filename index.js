@@ -1,7 +1,7 @@
 const stripe = require("stripe")("sk_test_ThlDssrPmTUhR9DGYEf0A4Le00LbNvGZCO");
 //set for local environment request
-const express = require("express");
-const cors = require("cors");
+import express, { json } from "express";
+//const cors = require("cors");
 
 //const ngrok = require("ngrok");
 /*****mAIN THING ABOUT CONNECTING APP WITH LOCAL HOST
@@ -12,19 +12,21 @@ const cors = require("cors");
  * then type ngrok http 8000
  */
 
-const uuid = require("uuid/v4");
+import uuid from "uuid/v4";
 const app = express();
 
-//app.use(express.static("client"));
 //Middleware
 // Automatically allow cross-origin requests
-app.use(cors({ origin: true }));
-app.use(express.json());
+//app.use(cors({ origin: true }));
+//app.use(express.static(`${__dirname}/StripeBackend`));
+
+//inthis case i'm receiving json
+app.use(json());
 const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
 
-app.set("port", process.env.PORT || 5000);
+let PortNumber = process.env.PORT || 5000;
 app.post("/Payment", (request, response) => {
   const { amount, currency, token } = request.body;
 
@@ -70,5 +72,5 @@ app.get("/", (req, res) => {
 });
 
 //will start hosting like localhost:8282 you'll see message in get
-app.listen(app.get("port"), () => console.log("Port is RUnning"));
+app.listen(PortNumber, () => console.log("Port is RUnning"));
 //exports.Payment = functions.https.onRequest(app);
