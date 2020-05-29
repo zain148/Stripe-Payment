@@ -1,7 +1,7 @@
 const stripe = require("stripe")("sk_test_ThlDssrPmTUhR9DGYEf0A4Le00LbNvGZCO");
 //set for local environment request
 const express = require("express");
-//const cors = require("cors");
+const cors = require("cors");
 
 //const ngrok = require("ngrok");
 /*****mAIN THING ABOUT CONNECTING APP WITH LOCAL HOST
@@ -17,7 +17,7 @@ const app = express();
 
 //Middleware
 // Automatically allow cross-origin requests
-//app.use(cors({ origin: true }));
+app.use(cors({ origin: true }));
 //app.use(express.static(`${__dirname}/StripeBackend`));
 //this app will use json
 app.use(express.json());
