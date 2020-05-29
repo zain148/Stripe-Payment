@@ -12,7 +12,7 @@ const cors = require("cors");
  * then type ngrok http 8000
  */
 
-const uuid = require("uuid/v4");
+//const uuid = require("uuid/v4");
 const app = express();
 
 //Middleware
@@ -22,7 +22,7 @@ app.use(cors({ origin: true }));
 //this app will use json
 app.use(express.json());
 //inthis case i'm receiving jso
-const idempontencyKey = uuid();
+//const idempontencyKey = uuid();
 //now this is required to be set the port number to
 //the port the heroku will decide
 
@@ -41,9 +41,9 @@ app.post("/Payment", (request, response) => {
         source: token.id,
         description: "Transaction for Lawn Ninja Pay In Advance",
       },
-      {
+      /*  {
         idempotencyKey: idempontencyKey,
-      },
+      },*/
       // this will handle error in stripe and show in console the return message
       function (err, charge) {
         console.log("error", err);
