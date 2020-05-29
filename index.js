@@ -29,7 +29,7 @@ app.use(express.json());
 let PortNumber = process.env.PORT || 5000;
 
 app.post("/Payment", (request, response) => {
-  const { amount, currency, token } = request.body;
+  const { amount, UserID, currency, token } = request.body;
 
   stripe.charges
     .create(
@@ -37,7 +37,7 @@ app.post("/Payment", (request, response) => {
         amount: amount,
         currency: currency,
         source: token,
-        description: "Pay In Advance Transaction from LawnNinja",
+        description: "Pay In Advance Transaction from LawnNinja by" + "\t" + UserID,
       }
       /*
       { idempotencyKey: idempontencyKey }
